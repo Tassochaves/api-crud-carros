@@ -2,6 +2,8 @@ package com.dev.crud_carros.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class Carro {
     private int ano;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("carros")
     private Marca marca;
 
     @ManyToMany(cascade = CascadeType.ALL)

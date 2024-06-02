@@ -1,12 +1,16 @@
 package com.dev.crud_carros.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.dev.crud_carros.entities.Carro;
+import com.dev.crud_carros.entities.Marca;
 
-@Repository
+
 public interface CarroRepository extends JpaRepository<Carro, Long>{
 
-    
+    public List<Carro> findByNome(String nome);
+
+    public List<Carro> findByMarca(Marca marca);
 }

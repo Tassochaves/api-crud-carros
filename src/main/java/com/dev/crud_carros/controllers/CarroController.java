@@ -1,5 +1,6 @@
 package com.dev.crud_carros.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.crud_carros.entities.Carro;
@@ -31,7 +33,7 @@ public class CarroController {
             String mensagem = this.carroService.save(carro);
             return new ResponseEntity<>(mensagem, HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Erro encontrado: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -42,7 +44,7 @@ public class CarroController {
             String mensagem = this.carroService.update(carro, id);
             return new ResponseEntity<>(mensagem, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Erro encontrado: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -53,18 +55,18 @@ public class CarroController {
             String mensagem = this.carroService.delete(id);
             return new ResponseEntity<>(mensagem, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Erro encontrado: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping("findAll")
-    public ResponseEntity<List<Carro>> findAll(){
+    @GetMapping("listAll")
+    public ResponseEntity<List<Carro>> listAll(){
 
         try {
-            List<Carro> lista = this.carroService.findAll();
-            return new ResponseEntity<>(lista, HttpStatus.OK);
+            List<Carro> result = this.carroService.listAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -76,6 +78,28 @@ public class CarroController {
             return new ResponseEntity<>(carro, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("findByNome")
+    public ResponseEntity<List<Carro>> findByNome(@RequestParam String nome){
+
+        try {
+            List<Carro> result = this.carroService.findByNome(nome);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("findByMarca")
+    public ResponseEntity<List<Carro>> findByMarca(@RequestParam long idMarca){
+
+        try {
+            List<Carro> result = this.carroService.findByMarca(idMarca);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
         }
     }
 }
