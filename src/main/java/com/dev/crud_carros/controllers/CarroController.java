@@ -102,4 +102,15 @@ public class CarroController {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
         }
     }
+
+     @GetMapping("findAcimaDoAno")
+     public ResponseEntity<List<Carro>> findAcimaDoAno(@RequestParam int ano){
+
+         try {
+             List<Carro> result = this.carroService.findAcimaDoAno(ano);
+             return new ResponseEntity<>(result, HttpStatus.OK);
+         } catch (Exception e) {
+             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+         }
+     }
 }

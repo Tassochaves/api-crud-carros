@@ -50,4 +50,8 @@ public class CarroService {
         marca.setId(idMarca);
         return this.carroRepository.findByMarca(marca); 
     }
+
+     public List<Carro> findAcimaDoAno(int ano){
+         return this.carroRepository.findAcimaDoAno(ano);
+     }
 }
