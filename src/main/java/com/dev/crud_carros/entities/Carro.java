@@ -30,7 +30,7 @@ public class Carro {
     private String nome;
     private int ano;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonIgnoreProperties("carros")
     private Marca marca;
 
