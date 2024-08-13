@@ -34,7 +34,11 @@ public class Carro {
     @JsonIgnoreProperties("carros")
     private Marca marca;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "tb_carro_proprietario")
     private List<Proprietario> proprietarios;
+
+    @ManyToMany
+    @JoinTable(name = "tb_carro_acessorio")
+    private List<Acessorio> acessorios;
 }
